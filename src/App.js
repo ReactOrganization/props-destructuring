@@ -1,28 +1,42 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import Listing from './Listing.js';
 
-class App extends Component {
-  render() {
+const func = () => fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(results => results.json())
+      .then(data => console.log(data))
+
+const App = () => {
+  useEffect(() => {
+    func()
+  },[])
+  const arrObj = [
+      {
+        title: 'Modern Loft',
+        type: 'Studio',
+        location: {
+          city: 'San Francisco',
+          state: 'CA',
+          country: 'USA'
+        }
+      },
+      {
+        title: 'Spacious 2 Bedroom',
+        type: 'Condo',
+        location: {
+          city: 'Los Angeles',
+          state: 'CA',
+          country: 'USA'
+        }
+      },
+    ];  
+
+    console.log(arrObj)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+				<Listing arrObj = {arrObj} />
       </div>
     );
   }
-}
 
 export default App;
